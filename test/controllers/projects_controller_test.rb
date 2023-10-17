@@ -16,10 +16,9 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create project" do
-    assert_difference("Project.count") do
-      post projects_url, params: { project: { name: @project.name, url: @project.url } }
+    assert_difference("Project.count", 1) do
+      post projects_url, params: { project: { name: "New Project", url: "http://newproject.url" } }
     end
-
     assert_redirected_to project_url(Project.last)
   end
 
@@ -34,7 +33,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update project" do
-    patch project_url(@project), params: { project: { name: @project.name, url: @project.url } }
+    patch project_url(@project), params: { project: { name: "Updated Name", url: "http://updated.url" } }
     assert_redirected_to project_url(@project)
   end
 
@@ -48,5 +47,38 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to projects_url
   end
-  
+
+
+
+
+
+  test "should get index in JSON format" do
+    get projects_url(format: :json)
+    assert_response :success
+  end
+
+  test "should get index in XML format" do
+    get projects_url(format: :xml)
+    assert_response :success
+  end
+
+  test "should not create project with invalid params" do
+    assert_no_difference('Project.count') do
+      post projects_url, params: { project: { name: '', url: '' } }
+    end
+    assert_response :unprocessable_entity
+  end
+
+  test "should not update project with invalid params" do
+    patch project_url(@project), params: { project: { name: '', url: '' } }
+    assert_response :unprocessable_entity
+  end
+
+  test "should not destroy project if students exist" do
+    assert_no_difference('Project.count') do
+      delete project_url(@project)
+    end
+    assert_redirected_to projects_url
+    assert_equal "Cannot delete project with existing evaluations.", flash[:alert]
+  end
 end

@@ -31,4 +31,9 @@ class StudentTest < ActiveSupport::TestCase
     
     assert_equal 2, @student.project_evaluations.count
   end
+
+  test "should not save student without studentid" do
+    student = Student.new(name: "New Student")
+    assert_not student.save
+  end  
 end
