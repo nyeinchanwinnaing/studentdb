@@ -1,0 +1,1023 @@
+  [1m[35m (10.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "studentdb_test"[0m
+  [1m[35m (21.8ms)[0m  [1m[35mCREATE DATABASE "studentdb_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "project_evaluations" CASCADE[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "project_evaluations" ("id" bigserial primary key, "score" integer, "project_id" bigint NOT NULL, "student_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_project_evaluations_on_project_id" ON "project_evaluations" ("project_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_project_evaluations_on_student_id" ON "project_evaluations" ("student_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "projects" CASCADE[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying, "url" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "students" CASCADE[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "students" ("id" bigserial primary key, "studentid" character varying, "name" character varying, "project_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_students_on_project_id" ON "students" ("project_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "project_evaluations" ADD CONSTRAINT "fk_rails_f2d256da0f"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "project_evaluations" ADD CONSTRAINT "fk_rails_3d3c1c34d2"
+FOREIGN KEY ("student_id")
+  REFERENCES "students" ("id")
+[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "students" ADD CONSTRAINT "fk_rails_328ba14a60"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20230928071839)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20230927101149),
+(20230927102153);
+
+[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", "2023-10-17 16:45:57.276713"], ["updated_at", "2023-10-17 16:45:57.276713"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "9db87ee4393144af35c1031ce629f8b8f1aff2c2"], ["created_at", "2023-10-17 16:45:57.278794"], ["updated_at", "2023-10-17 16:45:57.278794"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "projects" DISABLE TRIGGER ALL;ALTER TABLE "project_evaluations" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[31mDELETE FROM "project_evaluations";
+DELETE FROM "projects";
+DELETE FROM "students";
+INSERT INTO "project_evaluations" ("id", "score", "project_id", "student_id", "created_at", "updated_at") VALUES (980190962, 1, 980190962, 980190962, '2023-10-17 16:45:57.346060', '2023-10-17 16:45:57.346060'), (298486374, 1, 298486374, 298486374, '2023-10-17 16:45:57.346060', '2023-10-17 16:45:57.346060');
+INSERT INTO "projects" ("id", "name", "url", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', '2023-10-17 16:45:57.348881', '2023-10-17 16:45:57.348881'), (298486374, 'MyString', 'MyString', '2023-10-17 16:45:57.348881', '2023-10-17 16:45:57.348881');
+INSERT INTO "students" ("id", "studentid", "name", "project_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, '2023-10-17 16:45:57.349243', '2023-10-17 16:45:57.349243'), (298486374, 'MyString', 'MyString', 298486374, '2023-10-17 16:45:57.349243', '2023-10-17 16:45:57.349243')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "projects" ENABLE TRIGGER ALL;ALTER TABLE "project_evaluations" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.1ms)[0m  [1m[35mdo $$
+  declare r record;
+BEGIN
+FOR r IN (
+  SELECT FORMAT(
+    'UPDATE pg_constraint SET convalidated=false WHERE conname = ''%I'' AND connamespace::regnamespace = ''%I''::regnamespace; ALTER TABLE %I.%I VALIDATE CONSTRAINT %I;',
+    constraint_name,
+    table_schema,
+    table_schema,
+    table_name,
+    constraint_name
+  ) AS constraint_check
+  FROM information_schema.table_constraints WHERE constraint_type = 'FOREIGN KEY'
+)
+  LOOP
+    EXECUTE (r.constraint_check);
+  END LOOP;
+END;
+$$;
+[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+ProjectsControllerTest: test_should_destroy_project
+---------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  [1m[36mStudent Destroy (0.3ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 980190962]]
+ProjectsControllerTest - test_should_destroy_project: ActiveRecord::InvalidForeignKey raised.
+If you expected this exception, use `assert_raises` as near to the code that raises as possible.
+Other block based assertions (e.g. `assert_difference`) can be used, as long as `assert_raises` is inside their block.
+
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+ProjectsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/new" for 127.0.0.1 at 2023-10-17 23:45:57 +0700
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 4.2ms | Allocations: 2487)
+  Rendered projects/new.html.erb within layouts/application (Duration: 5.9ms | Allocations: 3139)
+  Rendered layout layouts/application.html.erb (Duration: 189.9ms | Allocations: 93222)
+Completed 200 OK in 210ms (Views: 194.7ms | ActiveRecord: 0.0ms | Allocations: 100012)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_update_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/projects/980190962" for 127.0.0.1 at 2023-10-17 23:45:57 +0700
+Processing by ProjectsController#update as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Redirected to http://www.example.com/projects/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1349)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ProjectsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962/edit" for 127.0.0.1 at 2023-10-17 23:45:57 +0700
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/edit.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 0.4ms | Allocations: 798)
+  Rendered projects/edit.html.erb within layouts/application (Duration: 1.0ms | Allocations: 1081)
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | Allocations: 2538)
+Completed 200 OK in 3ms (Views: 1.9ms | ActiveRecord: 0.1ms | Allocations: 2918)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+ProjectsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects" for 127.0.0.1 at 2023-10-17 23:45:57 +0700
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/_project.html.erb (Duration: 0.4ms | Allocations: 187)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 16)
+  Rendered projects/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1180)
+  Rendered layout layouts/application.html.erb (Duration: 3.4ms | Allocations: 2645)
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.1ms | Allocations: 2988)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ProjectsControllerTest: test_should_show_project
+------------------------------------------------
+  [1m[36mProject Load (0.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962" for 127.0.0.1 at 2023-10-17 23:45:57 +0700
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  Rendered projects/show.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1951)
+  Rendered layout layouts/application.html.erb (Duration: 3.2ms | Allocations: 3408)
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.1ms | Allocations: 3810)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_create_project
+--------------------------------------------------
+  [1m[36mProject Load (0.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+Started POST "/projects" for 127.0.0.1 at 2023-10-17 23:45:57 +0700
+Processing by ProjectsController#create as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Create (0.1ms)[0m  [1m[32mINSERT INTO "projects" ("name", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "MyString"], ["url", "MyString"], ["created_at", "2023-10-17 16:45:57.769532"], ["updated_at", "2023-10-17 16:45:57.769532"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/980190963
+Completed 302 Found in 1ms (ActiveRecord: 0.2ms | Allocations: 843)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "projects" DISABLE TRIGGER ALL;ALTER TABLE "project_evaluations" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mDELETE FROM "project_evaluations";
+DELETE FROM "projects";
+DELETE FROM "students";
+INSERT INTO "project_evaluations" ("id", "score", "project_id", "student_id", "created_at", "updated_at") VALUES (980190962, 1, 980190962, 980190962, '2023-10-17 17:09:38.841904', '2023-10-17 17:09:38.841904'), (298486374, 1, 298486374, 298486374, '2023-10-17 17:09:38.841904', '2023-10-17 17:09:38.841904');
+INSERT INTO "projects" ("id", "name", "url", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', '2023-10-17 17:09:38.844639', '2023-10-17 17:09:38.844639'), (298486374, 'MyString', 'MyString', '2023-10-17 17:09:38.844639', '2023-10-17 17:09:38.844639');
+INSERT INTO "students" ("id", "studentid", "name", "project_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, '2023-10-17 17:09:38.845071', '2023-10-17 17:09:38.845071'), (298486374, 'MyString', 'MyString', 298486374, '2023-10-17 17:09:38.845071', '2023-10-17 17:09:38.845071')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "projects" ENABLE TRIGGER ALL;ALTER TABLE "project_evaluations" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.0ms)[0m  [1m[35mdo $$
+  declare r record;
+BEGIN
+FOR r IN (
+  SELECT FORMAT(
+    'UPDATE pg_constraint SET convalidated=false WHERE conname = ''%I'' AND connamespace::regnamespace = ''%I''::regnamespace; ALTER TABLE %I.%I VALIDATE CONSTRAINT %I;',
+    constraint_name,
+    table_schema,
+    table_schema,
+    table_name,
+    constraint_name
+  ) AS constraint_check
+  FROM information_schema.table_constraints WHERE constraint_type = 'FOREIGN KEY'
+)
+  LOOP
+    EXECUTE (r.constraint_check);
+  END LOOP;
+END;
+$$;
+[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ProjectsControllerTest: test_should_show_project
+------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:09:38 +0700
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  Rendered projects/show.html.erb within layouts/application (Duration: 9.4ms | Allocations: 7209)
+  Rendered layout layouts/application.html.erb (Duration: 58.7ms | Allocations: 41064)
+Completed 200 OK in 67ms (Views: 60.8ms | ActiveRecord: 0.2ms | Allocations: 45262)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+ProjectsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/new" for 127.0.0.1 at 2023-10-18 00:09:39 +0700
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.0ms | Allocations: 1152)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.8ms | Allocations: 1463)
+  Rendered layout layouts/application.html.erb (Duration: 2.2ms | Allocations: 2935)
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.0ms | Allocations: 3217)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_update_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:09:39 +0700
+Processing by ProjectsController#update as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Redirected to http://www.example.com/projects/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1188)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+ProjectsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects" for 127.0.0.1 at 2023-10-18 00:09:39 +0700
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/_project.html.erb (Duration: 0.4ms | Allocations: 181)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 16)
+  Rendered projects/index.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1101)
+  Rendered layout layouts/application.html.erb (Duration: 2.9ms | Allocations: 2566)
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.1ms | Allocations: 2911)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_create_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+Started POST "/projects" for 127.0.0.1 at 2023-10-18 00:09:39 +0700
+Processing by ProjectsController#create as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Create (0.1ms)[0m  [1m[32mINSERT INTO "projects" ("name", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "MyString"], ["url", "MyString"], ["created_at", "2023-10-17 17:09:39.024720"], ["updated_at", "2023-10-17 17:09:39.024720"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/980190963
+Completed 302 Found in 1ms (ActiveRecord: 0.3ms | Allocations: 843)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ProjectsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962/edit" for 127.0.0.1 at 2023-10-18 00:09:39 +0700
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/edit.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 0.4ms | Allocations: 795)
+  Rendered projects/edit.html.erb within layouts/application (Duration: 0.9ms | Allocations: 1060)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | Allocations: 2517)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms | Allocations: 2894)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+ProjectsControllerTest: test_should_destroy_project
+---------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."student_id" = $1[0m  [["student_id", 980190962]]
+  [1m[36mProjectEvaluation Destroy (0.1ms)[0m  [1m[31mDELETE FROM "project_evaluations" WHERE "project_evaluations"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mStudent Destroy (0.2ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started DELETE "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:09:39 +0700
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Destroy (0.1ms)[0m  [1m[31mDELETE FROM "projects" WHERE "projects"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 1ms (ActiveRecord: 0.3ms | Allocations: 525)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "projects" DISABLE TRIGGER ALL;ALTER TABLE "project_evaluations" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mDELETE FROM "project_evaluations";
+DELETE FROM "projects";
+DELETE FROM "students";
+INSERT INTO "project_evaluations" ("id", "score", "project_id", "student_id", "created_at", "updated_at") VALUES (980190962, 1, 980190962, 980190962, '2023-10-17 17:16:40.304243', '2023-10-17 17:16:40.304243'), (298486374, 1, 298486374, 298486374, '2023-10-17 17:16:40.304243', '2023-10-17 17:16:40.304243');
+INSERT INTO "projects" ("id", "name", "url", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', '2023-10-17 17:16:40.306990', '2023-10-17 17:16:40.306990'), (298486374, 'MyString', 'MyString', '2023-10-17 17:16:40.306990', '2023-10-17 17:16:40.306990');
+INSERT INTO "students" ("id", "studentid", "name", "project_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, '2023-10-17 17:16:40.307416', '2023-10-17 17:16:40.307416'), (298486374, 'MyString', 'MyString', 298486374, '2023-10-17 17:16:40.307416', '2023-10-17 17:16:40.307416')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "projects" ENABLE TRIGGER ALL;ALTER TABLE "project_evaluations" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.2ms)[0m  [1m[35mdo $$
+  declare r record;
+BEGIN
+FOR r IN (
+  SELECT FORMAT(
+    'UPDATE pg_constraint SET convalidated=false WHERE conname = ''%I'' AND connamespace::regnamespace = ''%I''::regnamespace; ALTER TABLE %I.%I VALIDATE CONSTRAINT %I;',
+    constraint_name,
+    table_schema,
+    table_schema,
+    table_name,
+    constraint_name
+  ) AS constraint_check
+  FROM information_schema.table_constraints WHERE constraint_type = 'FOREIGN KEY'
+)
+  LOOP
+    EXECUTE (r.constraint_check);
+  END LOOP;
+END;
+$$;
+[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+ProjectsControllerTest: test_should_destroy_project
+---------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."student_id" = $1[0m  [["student_id", 980190962]]
+  [1m[36mProjectEvaluation Destroy (0.1ms)[0m  [1m[31mDELETE FROM "project_evaluations" WHERE "project_evaluations"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mStudent Destroy (0.1ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started DELETE "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:16:40 +0700
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Destroy (0.2ms)[0m  [1m[31mDELETE FROM "projects" WHERE "projects"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 4ms (ActiveRecord: 0.4ms | Allocations: 2672)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+ProjectsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects" for 127.0.0.1 at 2023-10-18 00:16:40 +0700
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/_project.html.erb (Duration: 0.3ms | Allocations: 211)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 16)
+  Rendered projects/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 1591)
+  Rendered layout layouts/application.html.erb (Duration: 49.9ms | Allocations: 35425)
+Completed 200 OK in 54ms (Views: 51.5ms | ActiveRecord: 0.1ms | Allocations: 38945)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_create_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+Started POST "/projects" for 127.0.0.1 at 2023-10-18 00:16:40 +0700
+Processing by ProjectsController#create as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Create (0.1ms)[0m  [1m[32mINSERT INTO "projects" ("name", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "MyString"], ["url", "MyString"], ["created_at", "2023-10-17 17:16:40.464592"], ["updated_at", "2023-10-17 17:16:40.464592"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/980190963
+Completed 302 Found in 1ms (ActiveRecord: 0.3ms | Allocations: 1184)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ProjectsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962/edit" for 127.0.0.1 at 2023-10-18 00:16:40 +0700
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/edit.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.8ms | Allocations: 2289)
+  Rendered projects/edit.html.erb within layouts/application (Duration: 2.7ms | Allocations: 2624)
+  Rendered layout layouts/application.html.erb (Duration: 3.3ms | Allocations: 4081)
+Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.1ms | Allocations: 4463)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_update_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:16:40 +0700
+Processing by ProjectsController#update as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Redirected to http://www.example.com/projects/980190962
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms | Allocations: 592)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+ProjectsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/new" for 127.0.0.1 at 2023-10-18 00:16:40 +0700
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 0.3ms | Allocations: 716)
+  Rendered projects/new.html.erb within layouts/application (Duration: 0.9ms | Allocations: 926)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | Allocations: 2391)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms | Allocations: 2662)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ProjectsControllerTest: test_should_show_project
+------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:16:40 +0700
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  Rendered projects/show.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1898)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | Allocations: 3355)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms | Allocations: 3756)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "projects" DISABLE TRIGGER ALL;ALTER TABLE "project_evaluations" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mDELETE FROM "project_evaluations";
+DELETE FROM "projects";
+DELETE FROM "students";
+INSERT INTO "project_evaluations" ("id", "score", "project_id", "student_id", "created_at", "updated_at") VALUES (980190962, 1, 980190962, 980190962, '2023-10-17 17:25:32.131057', '2023-10-17 17:25:32.131057'), (298486374, 1, 298486374, 298486374, '2023-10-17 17:25:32.131057', '2023-10-17 17:25:32.131057');
+INSERT INTO "projects" ("id", "name", "url", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', '2023-10-17 17:25:32.133642', '2023-10-17 17:25:32.133642'), (298486374, 'MyString', 'MyString', '2023-10-17 17:25:32.133642', '2023-10-17 17:25:32.133642');
+INSERT INTO "students" ("id", "studentid", "name", "project_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, '2023-10-17 17:25:32.134095', '2023-10-17 17:25:32.134095'), (298486374, 'MyString', 'MyString', 298486374, '2023-10-17 17:25:32.134095', '2023-10-17 17:25:32.134095')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "projects" ENABLE TRIGGER ALL;ALTER TABLE "project_evaluations" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.9ms)[0m  [1m[35mdo $$
+  declare r record;
+BEGIN
+FOR r IN (
+  SELECT FORMAT(
+    'UPDATE pg_constraint SET convalidated=false WHERE conname = ''%I'' AND connamespace::regnamespace = ''%I''::regnamespace; ALTER TABLE %I.%I VALIDATE CONSTRAINT %I;',
+    constraint_name,
+    table_schema,
+    table_schema,
+    table_name,
+    constraint_name
+  ) AS constraint_check
+  FROM information_schema.table_constraints WHERE constraint_type = 'FOREIGN KEY'
+)
+  LOOP
+    EXECUTE (r.constraint_check);
+  END LOOP;
+END;
+$$;
+[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+StudentTest: test_should_belong_to_project
+------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------
+StudentTest: test_should_have_many_project_evaluations
+------------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------
+StudentTest: test_should_be_valid
+---------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_update_project
+--------------------------------------------------
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:25:32 +0700
+Processing by ProjectsController#update as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Redirected to http://www.example.com/projects/980190962
+Completed 302 Found in 5ms (ActiveRecord: 0.1ms | Allocations: 3146)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ProjectsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962/edit" for 127.0.0.1 at 2023-10-18 00:25:32 +0700
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/edit.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.9ms | Allocations: 2386)
+  Rendered projects/edit.html.erb within layouts/application (Duration: 3.0ms | Allocations: 3066)
+  Rendered layout layouts/application.html.erb (Duration: 57.9ms | Allocations: 36927)
+Completed 200 OK in 63ms (Views: 59.8ms | ActiveRecord: 0.1ms | Allocations: 40478)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_create_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+Started POST "/projects" for 127.0.0.1 at 2023-10-18 00:25:32 +0700
+Processing by ProjectsController#create as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Create (0.1ms)[0m  [1m[32mINSERT INTO "projects" ("name", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "MyString"], ["url", "MyString"], ["created_at", "2023-10-17 17:25:32.311411"], ["updated_at", "2023-10-17 17:25:32.311411"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/980190963
+Completed 302 Found in 1ms (ActiveRecord: 0.3ms | Allocations: 863)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+ProjectsControllerTest: test_should_destroy_project
+---------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."student_id" = $1[0m  [["student_id", 980190962]]
+  [1m[36mProjectEvaluation Destroy (0.1ms)[0m  [1m[31mDELETE FROM "project_evaluations" WHERE "project_evaluations"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mStudent Destroy (0.1ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started DELETE "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:25:32 +0700
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Destroy (0.1ms)[0m  [1m[31mDELETE FROM "projects" WHERE "projects"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 1ms (ActiveRecord: 0.3ms | Allocations: 525)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ProjectsControllerTest: test_should_show_project
+------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:25:32 +0700
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  Rendered projects/show.html.erb within layouts/application (Duration: 2.1ms | Allocations: 1904)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | Allocations: 3370)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.1ms | Allocations: 3773)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+ProjectsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/new" for 127.0.0.1 at 2023-10-18 00:25:32 +0700
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 0.4ms | Allocations: 705)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.2ms | Allocations: 915)
+  Rendered layout layouts/application.html.erb (Duration: 1.9ms | Allocations: 2380)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 2653)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+ProjectsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects" for 127.0.0.1 at 2023-10-18 00:25:32 +0700
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/_project.html.erb (Duration: 0.4ms | Allocations: 181)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 16)
+  Rendered projects/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 1145)
+  Rendered layout layouts/application.html.erb (Duration: 2.8ms | Allocations: 2610)
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.1ms | Allocations: 2953)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "projects" DISABLE TRIGGER ALL;ALTER TABLE "project_evaluations" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mDELETE FROM "project_evaluations";
+DELETE FROM "projects";
+DELETE FROM "students";
+INSERT INTO "project_evaluations" ("id", "score", "project_id", "student_id", "created_at", "updated_at") VALUES (980190962, 1, 980190962, 980190962, '2023-10-17 17:27:26.698456', '2023-10-17 17:27:26.698456'), (298486374, 1, 298486374, 298486374, '2023-10-17 17:27:26.698456', '2023-10-17 17:27:26.698456');
+INSERT INTO "projects" ("id", "name", "url", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', '2023-10-17 17:27:26.701250', '2023-10-17 17:27:26.701250'), (298486374, 'MyString', 'MyString', '2023-10-17 17:27:26.701250', '2023-10-17 17:27:26.701250');
+INSERT INTO "students" ("id", "studentid", "name", "project_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, '2023-10-17 17:27:26.701675', '2023-10-17 17:27:26.701675'), (298486374, 'MyString', 'MyString', 298486374, '2023-10-17 17:27:26.701675', '2023-10-17 17:27:26.701675')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "projects" ENABLE TRIGGER ALL;ALTER TABLE "project_evaluations" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.0ms)[0m  [1m[35mdo $$
+  declare r record;
+BEGIN
+FOR r IN (
+  SELECT FORMAT(
+    'UPDATE pg_constraint SET convalidated=false WHERE conname = ''%I'' AND connamespace::regnamespace = ''%I''::regnamespace; ALTER TABLE %I.%I VALIDATE CONSTRAINT %I;',
+    constraint_name,
+    table_schema,
+    table_schema,
+    table_name,
+    constraint_name
+  ) AS constraint_check
+  FROM information_schema.table_constraints WHERE constraint_type = 'FOREIGN KEY'
+)
+  LOOP
+    EXECUTE (r.constraint_check);
+  END LOOP;
+END;
+$$;
+[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_update_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:27:26 +0700
+Processing by ProjectsController#update as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Redirected to http://www.example.com/projects/980190962
+Completed 302 Found in 4ms (ActiveRecord: 0.1ms | Allocations: 3210)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_create_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+Started POST "/projects" for 127.0.0.1 at 2023-10-18 00:27:26 +0700
+Processing by ProjectsController#create as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Create (0.1ms)[0m  [1m[32mINSERT INTO "projects" ("name", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "MyString"], ["url", "MyString"], ["created_at", "2023-10-17 17:27:26.788157"], ["updated_at", "2023-10-17 17:27:26.788157"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/980190963
+Completed 302 Found in 1ms (ActiveRecord: 0.3ms | Allocations: 881)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+ProjectsControllerTest: test_should_destroy_project
+---------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."student_id" = $1[0m  [["student_id", 980190962]]
+  [1m[36mProjectEvaluation Destroy (0.1ms)[0m  [1m[31mDELETE FROM "project_evaluations" WHERE "project_evaluations"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mStudent Destroy (0.2ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started DELETE "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:27:26 +0700
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Destroy (0.2ms)[0m  [1m[31mDELETE FROM "projects" WHERE "projects"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 1ms (ActiveRecord: 0.4ms | Allocations: 525)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ProjectsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962/edit" for 127.0.0.1 at 2023-10-18 00:27:26 +0700
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/edit.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 1.9ms | Allocations: 2387)
+  Rendered projects/edit.html.erb within layouts/application (Duration: 3.5ms | Allocations: 3067)
+  Rendered layout layouts/application.html.erb (Duration: 56.8ms | Allocations: 36968)
+Completed 200 OK in 62ms (Views: 58.9ms | ActiveRecord: 0.1ms | Allocations: 40519)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+ProjectsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/new" for 127.0.0.1 at 2023-10-18 00:27:26 +0700
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 0.4ms | Allocations: 716)
+  Rendered projects/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 930)
+  Rendered layout layouts/application.html.erb (Duration: 1.8ms | Allocations: 2395)
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.0ms | Allocations: 2668)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ProjectsControllerTest: test_should_show_project
+------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:27:26 +0700
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  Rendered projects/show.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1908)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | Allocations: 3365)
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.2ms | Allocations: 3767)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+ProjectsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects" for 127.0.0.1 at 2023-10-18 00:27:26 +0700
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/_project.html.erb (Duration: 0.5ms | Allocations: 181)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 16)
+  Rendered projects/index.html.erb within layouts/application (Duration: 2.2ms | Allocations: 1145)
+  Rendered layout layouts/application.html.erb (Duration: 2.7ms | Allocations: 2610)
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.1ms | Allocations: 2959)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------
+StudentTest: test_should_have_many_project_evaluations
+------------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------
+StudentTest: test_should_be_valid
+---------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+StudentTest: test_should_belong_to_project
+------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "projects" DISABLE TRIGGER ALL;ALTER TABLE "project_evaluations" DISABLE TRIGGER ALL;ALTER TABLE "students" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mDELETE FROM "project_evaluations";
+DELETE FROM "projects";
+DELETE FROM "students";
+INSERT INTO "project_evaluations" ("id", "score", "project_id", "student_id", "created_at", "updated_at") VALUES (980190962, 1, 980190962, 980190962, '2023-10-17 17:30:39.923629', '2023-10-17 17:30:39.923629'), (298486374, 1, 298486374, 298486374, '2023-10-17 17:30:39.923629', '2023-10-17 17:30:39.923629');
+INSERT INTO "projects" ("id", "name", "url", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', '2023-10-17 17:30:39.926946', '2023-10-17 17:30:39.926946'), (298486374, 'MyString', 'MyString', '2023-10-17 17:30:39.926946', '2023-10-17 17:30:39.926946');
+INSERT INTO "students" ("id", "studentid", "name", "project_id", "created_at", "updated_at") VALUES (980190962, 'MyString', 'MyString', 980190962, '2023-10-17 17:30:39.927439', '2023-10-17 17:30:39.927439'), (298486374, 'MyString', 'MyString', 298486374, '2023-10-17 17:30:39.927439', '2023-10-17 17:30:39.927439')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "projects" ENABLE TRIGGER ALL;ALTER TABLE "project_evaluations" ENABLE TRIGGER ALL;ALTER TABLE "students" ENABLE TRIGGER ALL;ALTER TABLE "schema_migrations" ENABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" ENABLE TRIGGER ALL[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.1ms)[0m  [1m[35mdo $$
+  declare r record;
+BEGIN
+FOR r IN (
+  SELECT FORMAT(
+    'UPDATE pg_constraint SET convalidated=false WHERE conname = ''%I'' AND connamespace::regnamespace = ''%I''::regnamespace; ALTER TABLE %I.%I VALIDATE CONSTRAINT %I;',
+    constraint_name,
+    table_schema,
+    table_schema,
+    table_name,
+    constraint_name
+  ) AS constraint_check
+  FROM information_schema.table_constraints WHERE constraint_type = 'FOREIGN KEY'
+)
+  LOOP
+    EXECUTE (r.constraint_check);
+  END LOOP;
+END;
+$$;
+[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_create_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+Started POST "/projects" for 127.0.0.1 at 2023-10-18 00:30:39 +0700
+Processing by ProjectsController#create as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Create (0.1ms)[0m  [1m[32mINSERT INTO "projects" ("name", "url", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "MyString"], ["url", "MyString"], ["created_at", "2023-10-17 17:30:40.006674"], ["updated_at", "2023-10-17 17:30:40.006674"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects/980190963
+Completed 302 Found in 4ms (ActiveRecord: 0.3ms | Allocations: 3305)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------
+ProjectsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects" for 127.0.0.1 at 2023-10-18 00:30:40 +0700
+Processing by ProjectsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  Rendered projects/_project.html.erb (Duration: 0.5ms | Allocations: 206)
+  Rendered projects/_project.html.erb (Duration: 0.0ms | Allocations: 16)
+  Rendered projects/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1585)
+  Rendered layout layouts/application.html.erb (Duration: 51.4ms | Allocations: 35434)
+Completed 200 OK in 58ms (Views: 53.6ms | ActiveRecord: 0.1ms | Allocations: 38961)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------
+ProjectsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962/edit" for 127.0.0.1 at 2023-10-18 00:30:40 +0700
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/edit.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 2.0ms | Allocations: 2297)
+  Rendered projects/edit.html.erb within layouts/application (Duration: 2.9ms | Allocations: 2632)
+  Rendered layout layouts/application.html.erb (Duration: 3.4ms | Allocations: 4089)
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 0.1ms | Allocations: 4642)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+-------------------------------------------
+ProjectsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/new" for 127.0.0.1 at 2023-10-18 00:30:40 +0700
+Processing by ProjectsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering projects/new.html.erb within layouts/application
+  Rendered projects/_form.html.erb (Duration: 0.3ms | Allocations: 716)
+  Rendered projects/new.html.erb within layouts/application (Duration: 0.9ms | Allocations: 926)
+  Rendered layout layouts/application.html.erb (Duration: 1.4ms | Allocations: 2391)
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms | Allocations: 2663)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------
+ProjectsControllerTest: test_should_show_project
+------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started GET "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:30:40 +0700
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  Rendered projects/show.html.erb within layouts/application (Duration: 7.8ms | Allocations: 9047)
+  Rendered layout layouts/application.html.erb (Duration: 8.4ms | Allocations: 10504)
+Completed 200 OK in 9ms (Views: 8.5ms | ActiveRecord: 0.2ms | Allocations: 10906)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+--------------------------------------------------
+ProjectsControllerTest: test_should_update_project
+--------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Started PATCH "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:30:40 +0700
+Processing by ProjectsController#update as HTML
+  Parameters: {"project"=>{"name"=>"MyString", "url"=>"MyString"}, "id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+Redirected to http://www.example.com/projects/980190962
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms | Allocations: 597)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+---------------------------------------------------
+ProjectsControllerTest: test_should_destroy_project
+---------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mStudent Load (0.1ms)[0m  [1m[34mSELECT "students".* FROM "students" WHERE "students"."project_id" = $1[0m  [["project_id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."student_id" = $1[0m  [["student_id", 980190962]]
+  [1m[36mProjectEvaluation Destroy (0.1ms)[0m  [1m[31mDELETE FROM "project_evaluations" WHERE "project_evaluations"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mStudent Destroy (0.2ms)[0m  [1m[31mDELETE FROM "students" WHERE "students"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started DELETE "/projects/980190962" for 127.0.0.1 at 2023-10-18 00:30:40 +0700
+Processing by ProjectsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Destroy (0.2ms)[0m  [1m[31mDELETE FROM "projects" WHERE "projects"."id" = $1[0m  [["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/projects
+Completed 302 Found in 1ms (ActiveRecord: 0.3ms | Allocations: 525)
+  [1m[36mProject Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "projects"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+---------------------------------
+StudentTest: test_should_be_valid
+---------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("studentid", "name", "project_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["studentid", "123"], ["name", "John"], ["project_id", 980190962], ["created_at", "2023-10-17 17:30:40.107956"], ["updated_at", "2023-10-17 17:30:40.107956"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------------------
+StudentTest: test_should_have_many_project_evaluations
+------------------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("studentid", "name", "project_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["studentid", "123"], ["name", "John"], ["project_id", 980190962], ["created_at", "2023-10-17 17:30:40.109668"], ["updated_at", "2023-10-17 17:30:40.109668"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mProjectEvaluation Update (0.1ms)[0m  [1m[33mUPDATE "project_evaluations" SET "student_id" = $1, "updated_at" = $2 WHERE "project_evaluations"."id" = $3[0m  [["student_id", 980190964], ["updated_at", "2023-10-17 17:30:40.111837"], ["id", 980190962]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 298486374], ["LIMIT", 1]]
+  [1m[36mProjectEvaluation Update (0.1ms)[0m  [1m[33mUPDATE "project_evaluations" SET "student_id" = $1, "updated_at" = $2 WHERE "project_evaluations"."id" = $3[0m  [["student_id", 980190964], ["updated_at", "2023-10-17 17:30:40.112953"], ["id", 298486374]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mProjectEvaluation Load (0.1ms)[0m  [1m[34mSELECT "project_evaluations".* FROM "project_evaluations" WHERE "project_evaluations"."student_id" = $1 /* loading for inspect */ LIMIT $2[0m  [["student_id", 980190964], ["LIMIT", 11]]
+  [1m[36mProjectEvaluation Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "project_evaluations" WHERE "project_evaluations"."student_id" = $1[0m  [["student_id", 980190964]]
+  [1m[36mCACHE ProjectEvaluation Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "project_evaluations" WHERE "project_evaluations"."student_id" = $1[0m  [["student_id", 980190964]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+------------------------------------------
+StudentTest: test_should_belong_to_project
+------------------------------------------
+  [1m[36mProject Load (0.1ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 980190962], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mStudent Create (0.1ms)[0m  [1m[32mINSERT INTO "students" ("studentid", "name", "project_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["studentid", "123"], ["name", "John"], ["project_id", 980190962], ["created_at", "2023-10-17 17:30:40.115696"], ["updated_at", "2023-10-17 17:30:40.115696"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
